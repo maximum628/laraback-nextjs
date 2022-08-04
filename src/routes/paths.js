@@ -96,7 +96,7 @@ export const PATH_DASHBOARD = {
 };
 export const PATH_ADMIN = {
   root: ROOTS_ADMIN,
-  dashboard: path(ROOTS_ADMIN, '/dashboard'),
+  dashboard: path(ROOTS_ADMIN, '/app'),
   store_offers: {
     ecommerce: path(ROOTS_DASHBOARD, '/ecommerce'),
   },
