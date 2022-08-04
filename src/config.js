@@ -34,7 +34,7 @@ export const MAPBOX_API = process.env.MAPBOX_API;
 export const PATH_AFTER_LOGIN = PATH_DASHBOARD.general.app; // as '/dashboard/app'
 
 // ROOT PATH AFTER LOGIN SUCCESSFUL
-export const ADMIN_PAGE = PATH_ADMIN.dashboard; // as '/admin/app'
+export const ADMIN_PAGE = PATH_ADMIN.dashboard; // as '/admin/dashboard'
 // LAYOUT
 // ----------------------------------------------------------------------
 
