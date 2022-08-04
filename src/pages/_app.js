@@ -73,7 +73,6 @@ MyApp.propTypes = {
 
 export default function MyApp(props) {
   const { Component, pageProps, settings } = props;
-
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (

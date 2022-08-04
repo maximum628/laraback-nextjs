@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 // config
 import { PATH_AFTER_LOGIN } from '../../config';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_ADMIN } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
 export default function Index() {
   const { pathname, replace, prefetch } = useRouter();
-
+  console.log(123123123123213);
   useEffect(() => {
-    if (pathname === PATH_DASHBOARD.root) {
+    if (pathname === PATH_ADMIN.root) {
       replace(PATH_AFTER_LOGIN);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

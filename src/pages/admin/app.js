@@ -29,7 +29,7 @@ import { SeoIllustration } from '../../assets';
 // ----------------------------------------------------------------------
 
 GeneralApp.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <Layout variant="admin">{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
@@ -58,7 +58,7 @@ export default function GeneralApp() {
                   }}
                 />
               }
-              action={<Button variant="contained">Go Now</Button>}
+              action={<Button variant="contained">Go Now1</Button>}
             />
           </Grid>
 

@@ -39,11 +39,12 @@ const MainStyle = styled('main', {
 
 // ----------------------------------------------------------------------
 
-DashboardLayout.propTypes = {
+AdminDashboardLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default function DashboardLayout({ children }) {
+export default function AdminDashboardLayout({ children }) {
+  console.log(222222);
   const { collapseClick, isCollapse } = useCollapseDrawer();
 
   const { themeLayout } = useSettings();

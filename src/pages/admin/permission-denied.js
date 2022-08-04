@@ -6,7 +6,7 @@ import useSettings from '../../hooks/useSettings';
 // layouts
 import Layout from '../../layouts';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_ADMIN } from '../../routes/paths';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
@@ -40,7 +40,7 @@ export default function PermissionDenied() {
           links={[
             {
               name: 'Dashboard',
-              href: PATH_DASHBOARD.root,
+              href: PATH_ADMIN.root,
             },
             { name: 'Permission Denied' },
           ]}

@@ -16,6 +16,7 @@ const en = {
     documentation: `documentation`,
   },
   app: `app`,
+  dashboard: `dashboard`,
   user: `user`,
   list: `list`,
   edit: `edit`,
