@@ -118,7 +118,6 @@ export const _StoreInvoices = [...Array(10)].map((_, index) => ({
 }));
 
 export const _StoreList = [...Array(24)].map((_, index) => ({
-
   id: _mock.id(index),
   // avatarUrl: _mock.image.avatar(index),
   no: Number(index)+1,
@@ -131,5 +130,6 @@ export const _StoreList = [...Array(24)].map((_, index) => ({
   rating: '0.0',
   cicks: index,
   status: randomInArray(['active', 'draft']),
+  updatedat: '2022-08-01',
   role: _mock.role(index),
 }));

@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Checkbox, TableRow, TableCell, Typography, MenuItem } from '@mui/material';
+import { Checkbox, TableRow, TableCell, Typography, IconButton  } from '@mui/material';
 // components
 import Label from '../../../../components/Label';
 import Iconify from '../../../../components/Iconify';
-import { TableMoreMenu } from '../../../../components/table';
+// import { TableMoreMenu } from '../../../../components/table';
 
 // ----------------------------------------------------------------------
 
@@ -21,54 +21,44 @@ StoreTableRow.propTypes = {
 export default function StoreTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
   const theme = useTheme();
 
-  const { no,name, cashbackenabled, cashbackpercent, cashbacktype, isfeatured,visits,rating,cicks, status } = row;
-
-  const [openMenu, setOpenMenuActions] = useState(null);
-
-  const handleOpenMenu = (event) => {
-    setOpenMenuActions(event.currentTarget);
-  };
-
-  const handleCloseMenu = () => {
-    setOpenMenuActions(null);
-  };
+  const { no,name, cashbackenabled, cashbackpercent, cashbacktype, isfeatured,visits,rating,cicks, status,updatedat } = row;
   return (
     <TableRow hover selected={selected}>
       <TableCell padding="checkbox">
         <Checkbox checked={selected} onClick={onSelectRow} />
       </TableCell>
-      <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
+      <TableCell align="center">
           {no}
       </TableCell>
-      <TableCell align="right">
-        <TableMoreMenu
-          open={openMenu}
-          onOpen={handleOpenMenu}
-          onClose={handleCloseMenu}
-          actions={
-            <>
-              <MenuItem
-                onClick={() => {
-                  onDeleteRow();
-                  handleCloseMenu();
-                }}
-                sx={{ color: 'error.main' }}
-              >
-                <Iconify icon={'eva:trash-2-outline'} />
-                Delete
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  onEditRow();
-                  handleCloseMenu();
-                }}
-              >
-                <Iconify icon={'eva:edit-fill'} />
-                Edit
-              </MenuItem>
-            </>
-          }
-        />
+      <TableCell align="center" sx={{ display: 'flex', alignItems: 'center' }}>
+        <IconButton aria-label="view" color="secondary"
+        onClick={() => {
+            onEditRow();
+          }}
+        >
+          <Iconify icon={'eva:eye-fill'} width={20} height={20} />
+        </IconButton>
+        <IconButton aria-label="edit" color="primary"
+        onClick={() => {
+            onEditRow();
+          }}
+        >
+          <Iconify icon={'eva:edit-fill'} width={20} height={20} />
+        </IconButton>
+        <IconButton aria-label="delete row" color="error"
+        onClick={() => {
+            onDeleteRow();
+          }}
+        >
+          <Iconify icon={'eva:trash-2-outline'} width={20} height={20} />
+        </IconButton>
+        <IconButton aria-label="monitor" color="warning"
+        onClick={() => {
+          onEditRow();
+          }}
+        >
+          <Iconify icon={'eva:monitor-outline'} width={20} height={20} />
+        </IconButton>
       </TableCell>
       <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
         <Typography variant="subtitle2" noWrap>
@@ -120,6 +110,9 @@ export default function StoreTableRow({ row, selected, onEditRow, onSelectRow, o
         >
           {status}
         </Label>
+      </TableCell>
+      <TableCell align="left" sx={{ textTransform: 'capitalize' }}>
+          {updatedat}
       </TableCell>
     </TableRow>
   );

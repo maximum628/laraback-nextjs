@@ -95,10 +95,11 @@ export const PATH_DASHBOARD = {
   },
 };
 export const PATH_ADMIN = {
-  root: ROOTS_ADMIN,
+  root: path(ROOTS_ADMIN, '/app'),
   dashboard: path(ROOTS_ADMIN, '/app'),
   store_offers: {
     newstore: path(ROOTS_ADMIN, '/storesoffers/newstores'),
+    edit: (name) => path(ROOTS_ADMIN, `/storesoffers/${name}/edit`),
     stores: path(ROOTS_ADMIN, '/storesoffers/stores'),
     storecashback: path(ROOTS_ADMIN, '/storesoffers/storecashback'),
     storecategories: path(ROOTS_ADMIN, '/storesoffers/storecategories'),

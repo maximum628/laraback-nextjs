@@ -59,7 +59,7 @@ const ROLE_OPTIONS = [
 
 const TABLE_HEAD = [
   { id: 'no', label: 'No', align: 'left' },
-  { id: 'action', label: 'Action', align: 'left' },
+  { id: 'action', label: 'Action', align: 'left',width:'2' },
   { id: 'name', label: 'Name', align: 'left' },
   { id: 'cashbackenabled', label: 'Cashback Enabled', align: 'left' },
   { id: 'cashbackpercent', label: 'Cashback Percent', align: 'left' },
@@ -69,7 +69,7 @@ const TABLE_HEAD = [
   { id: 'rating', label: 'Rating', align: 'center' },
   { id: 'cicks', label: 'Clicks', align: 'center' },
   { id: 'status', label: 'Status', align: 'left' },
-  { id: '' },
+  { id: 'updatedat', label: 'Updated At', align: 'left' },
 ];
 
 // ----------------------------------------------------------------------
@@ -97,7 +97,7 @@ export default function StoreList() {
     onChangeDense,
     onChangePage,
     onChangeRowsPerPage,
-  } = useTable();
+  } = useTable({defaultOrderBy:"no",defaultOrder:'asc'});
   const { themeStretch } = useSettings();
 
   const { push } = useRouter();
@@ -132,6 +132,7 @@ export default function StoreList() {
   };
 
   const handleEditRow = (id) => {
+    console.log(id);
     push(PATH_ADMIN.user.edit(paramCase(id)));
   };
 

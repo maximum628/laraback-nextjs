@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 // @mui
 import { Container } from '@mui/material';
 // routes
-import { PATH_DASHBOARD } from '../../../../routes/paths';
+import { PATH_ADMIN } from '../../../../routes/paths';
 // hooks
 import useSettings from '../../../../hooks/useSettings';
 // _mock_
-import { _userList } from '../../../../_mock';
+import { _StoreList } from '../../../../_mock';
 // layouts
 import Layout from '../../../../layouts';
 // components
@@ -20,7 +20,7 @@ import UserNewEditForm from '../../../../sections/@dashboard/user/UserNewEditFor
 // ----------------------------------------------------------------------
 
 UserEdit.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <Layout variant="admin">{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
@@ -32,16 +32,16 @@ export default function UserEdit() {
 
   const { name } = query;
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const currentUser = _StoreList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="User: Edit user">
+    <Page title="Store: Edit store">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="Edit user"
+          heading="Edit store"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.list },
+            { name: 'Admin', href: PATH_ADMIN.root },
+            { name: 'Stores', href: PATH_ADMIN.store_offers.stores },
             { name: capitalCase(name) },
           ]}
         />
