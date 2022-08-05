@@ -44,7 +44,6 @@ AdminDashboardLayout.propTypes = {
 };
 
 export default function AdminDashboardLayout({ children }) {
-  console.log(222222);
   const { collapseClick, isCollapse } = useCollapseDrawer();
 
   const { themeLayout } = useSettings();

@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+// next
+// import NextLink from 'next/link';
 import { Stack, InputAdornment, TextField, MenuItem } from '@mui/material';
 // components
 import Iconify from '../../../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
-UserTableToolbar.propTypes = {
+StoreTableToolbar.propTypes = {
   filterName: PropTypes.string,
   filterRole: PropTypes.string,
   onFilterName: PropTypes.func,
@@ -13,7 +15,7 @@ UserTableToolbar.propTypes = {
   optionsRole: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default function UserTableToolbar({ filterName, filterRole, onFilterName, onFilterRole, optionsRole }) {
+export default function StoreTableToolbar({ filterName, filterRole, onFilterName, onFilterRole, optionsRole }) {
   return (
     <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ py: 2.5, px: 3 }}>
       <TextField
@@ -24,7 +26,7 @@ export default function UserTableToolbar({ filterName, filterRole, onFilterName,
         onChange={onFilterRole}
         SelectProps={{
           MenuProps: {
-            sx: { '& .MuiPaper-root': { maxHeight: 260 } },
+            sx: { '& .MuiPaper-root': { maxHeight: 150 } },
           },
         }}
         sx={{
@@ -53,7 +55,7 @@ export default function UserTableToolbar({ filterName, filterRole, onFilterName,
         fullWidth
         value={filterName}
         onChange={(event) => onFilterName(event.target.value)}
-        placeholder="Search user..."
+        placeholder="Search store..."
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

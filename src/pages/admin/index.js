@@ -10,7 +10,6 @@ import { PATH_ADMIN } from '../../routes/paths';
 
 export default function Index() {
   const { pathname, replace, prefetch } = useRouter();
-  console.log(123123123123213);
   useEffect(() => {
     if (pathname === PATH_ADMIN.root) {
       replace(PATH_AFTER_LOGIN);

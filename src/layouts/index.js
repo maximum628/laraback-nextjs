@@ -15,7 +15,6 @@ Layout.propTypes = {
 };
 
 export default function Layout({ variant = 'dashboard', children }) {
-  console.log(variant);
   if (variant === 'logoOnly') {
     return <LogoOnlyLayout> {children} </LogoOnlyLayout>;
   }

@@ -24,7 +24,7 @@ import {
 // ----------------------------------------------------------------------
 
 GeneralBanking.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <Layout variant="admin">{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------

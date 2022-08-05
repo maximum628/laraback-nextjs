@@ -34,7 +34,7 @@ const navConfig = [
     items: [
       { title: 'dashboard', path: PATH_ADMIN.dashboard, icon: ICONS.dashboard },
       {
-        title: 'store_offers',
+        title: 'STORES & OFFERS',
         path: PATH_ADMIN.store_offers.stores,
         icon: ICONS.user,
         children: [

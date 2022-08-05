@@ -17,6 +17,8 @@ const en = {
   },
   app: `app`,
   dashboard: `dashboard`,
+  "STORES & OFFERS": `STORES & OFFERS`,
+  stores: `stores`,
   user: `user`,
   list: `list`,
   edit: `edit`,
