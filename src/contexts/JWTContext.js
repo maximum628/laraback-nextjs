@@ -109,12 +109,12 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', {
+    const response = await axios.post('/api/auth/login', {
       email,
       password,
     });
     const { accessToken, user } = response.data;
-
+    console.log(accessToken, user);
     setSession(accessToken);
 
     dispatch({
