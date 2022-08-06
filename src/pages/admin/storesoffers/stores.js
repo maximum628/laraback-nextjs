@@ -42,7 +42,7 @@ import { StoreTableToolbar, StoreTableRow } from '../../../sections/@admin/store
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['all', 'active', 'banned'];
+const STATUS_OPTIONS = ['all', 'active', 'draft'];
 
 const ROLE_OPTIONS = [
   'all',
