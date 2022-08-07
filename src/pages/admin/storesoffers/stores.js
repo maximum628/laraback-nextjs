@@ -133,7 +133,7 @@ export default function StoreList() {
 
   const handleEditRow = (id) => {
     console.log(id);
-    push(PATH_ADMIN.user.edit(paramCase(id)));
+    push(PATH_ADMIN.store_offers.storeedit(paramCase(id)));
   };
 
   const dataFiltered = applySortFilter({

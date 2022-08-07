@@ -70,11 +70,10 @@ function AuthProvider({ children }) {
     const initialize = async () => {
       try {
         const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : '';
-
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
 
-          const response = await axios.get('/api/account/my-account');
+          const response = await axios.get('/api/auth/myaccount');
           const { user } = response.data;
 
           dispatch({

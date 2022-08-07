@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 // next
-import { useRouter } from 'next/router';
+import { Storeouter } from 'next/router';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,51 +22,71 @@ import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } fro
 
 // ----------------------------------------------------------------------
 
-UserNewEditForm.propTypes = {
+StoreNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
-  currentUser: PropTypes.object,
+  currentStore: PropTypes.object,
 };
 
-export default function UserNewEditForm({ isEdit = false, currentUser }) {
-  const { push } = useRouter();
+export default function StoreNewEditForm({ isEdit = false, currentStore }) {
+  const { push } = Storeouter();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewUserSchema = Yup.object().shape({
+  const NewStoreSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    slug: Yup.string().required('Slug is required'),
+    logo: Yup.string(),
+    homepage: Yup.string().required('Homepage is required'),
+    domainname: Yup.string().required('Domain Name is required'),
+    cats: Yup.string().required('Cats is required'),
+    deeplink: Yup.string().required('Deeplink is required'),
+    cashbackenabled: Yup.string().required('Cashback Enabled is required'),
+    cashbackpercent: Yup.string().required('Cashback Percent is required'),
+    cashbacktype: Yup.string().required('Cashback Type is required'),
+    trackingspeed: Yup.string(),
+    confirmduration: Yup.string(),
+    isclaimable: Yup.string().required('Is Claimable is required'),
+    isshareable: Yup.string().required('Is Shareable is required'),
+    isfeature: Yup.string().required('Is Feature is required'),
+    excludesitemap: Yup.string().required('Exclude Sitemap is required'),
+    network: Yup.string(),
+    networkcampaignid: Yup.string(),
+    ghost: Yup.string().required('Ghost is required'),
+    status: Yup.string().required('Status is required'),
+
+    // email: Yup.string().required('Email is required').email(),
+    // avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      zipCode: currentUser?.zipCode || '',
-      avatarUrl: currentUser?.avatarUrl || '',
-      isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status,
-      company: currentUser?.company || '',
-      role: currentUser?.role || '',
+      name: currentStore?.name || '',
+      slug: currentStore?.slug || '',
+      logo: currentStore?.logo || '',
+      homepage: currentStore?.homepage || '',
+      domainname: currentStore?.domainname || '',
+      cats: currentStore?.cats || '',
+      deeplink: currentStore?.deeplink || '',
+      cashbackenabled: currentStore?.cashbackenabled || true,
+      cashbackpercent: currentStore?.cashbackpercent || '',
+      cashbacktype: currentStore?.cashbacktype || 'cashback',
+      trackingspeed: currentStore?.trackingspeed || '',
+      confirmduration: currentStore?.confirmduration || '',
+      isclaimable: currentStore?.isclaimable || true,
+      isshareable: currentStore?.isshareable || true,
+      isfeature: currentStore?.isfeature || true,
+      excludesitemap: currentStore?.excludesitemap || true,
+      network: currentStore?.network || '',
+      networkcampaignid: currentStore?.networkcampaignid || '',
+      ghost: currentStore?.ghost || true,
+      status: currentStore?.status || 'draft',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentUser]
+    [currentStore]
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewStoreSchema),
     defaultValues,
   });
 
@@ -82,21 +102,21 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentUser) {
+    if (isEdit && currentStore) {
       reset(defaultValues);
     }
     if (!isEdit) {
       reset(defaultValues);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentUser]);
+  }, [isEdit, currentStore]);
 
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      push(PATH_DASHBOARD.user.list);
+      push(PATH_DASHBOARD.Store.list);
     } catch (error) {
       console.error(error);
     }
@@ -194,7 +214,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
                     Email Verified
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the user a verification email
+                    Disabling this will automatically send the Store a verification email
                   </Typography>
                 </>
               }
@@ -236,7 +256,7 @@ export default function UserNewEditForm({ isEdit = false, currentUser }) {
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create User' : 'Save Changes'}
+                {!isEdit ? 'Create Store' : 'Save Changes'}
               </LoadingButton>
             </Stack>
           </Card>
