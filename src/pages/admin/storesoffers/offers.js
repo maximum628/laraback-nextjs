@@ -28,7 +28,7 @@ import useTabs from '../../../hooks/useTabs';
 import useSettings from '../../../hooks/useSettings';
 import useTable, { getComparator, emptyRows } from '../../../hooks/useTable';
 // _mock_
-import { _StoreList } from '../../../_mock';
+import { _OfferLists } from '../../../_mock';
 // layouts
 import Layout from '../../../layouts';
 // components
@@ -38,10 +38,9 @@ import Scrollbar from '../../../components/Scrollbar';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import { TableEmptyRows, TableHeadCustom, TableNoData, TableSelectedActions } from '../../../components/table';
 // sections
-import { StoreTableToolbar, StoreTableRow } from '../../../sections/@admin/storesoffers/stores';
+import { StoreCatetoriesTableToolbar, StoreCatetoriesTableRow } from '../../../sections/@admin/storesoffers/storescategories';
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 // ----------------------------------------------------------------------
-
 const mytheme = createTheme({
   status: {
     danger: '#e53e3e',
@@ -61,6 +60,7 @@ const mytheme = createTheme({
     },
   },
 });
+
 const STATUS_OPTIONS = ['all', 'active', 'draft'];
 
 const ROLE_OPTIONS = [
@@ -79,26 +79,24 @@ const ROLE_OPTIONS = [
 const TABLE_HEAD = [
   { id: 'no', label: 'No', align: 'left' },
   { id: 'action', label: 'Action', align: 'left',width:'2' },
-  { id: 'name', label: 'Name', align: 'left' },
-  { id: 'cashbackenabled', label: 'Cashback Enabled', align: 'left' },
-  { id: 'cashbackpercent', label: 'Cashback Percent', align: 'left' },
-  { id: 'cashbacktype', label: 'Cashback Type', align: 'left' },
+  { id: 'title', label: 'Title', align: 'left' },
+  { id: 'store', label: 'Store', align: 'left' },
+  { id: 'parentid', label: 'Parent Id', align: 'left' },
   { id: 'isfeatured', label: 'Is Featured', align: 'left' },
-  { id: 'visits', label: 'Visits', align: 'left' },
-  { id: 'rating', label: 'Rating', align: 'center' },
-  { id: 'cicks', label: 'Clicks', align: 'center' },
-  { id: 'status', label: 'Status', align: 'left' },
+  { id: 'expirydate', label: 'Expiry Date', align: 'left' },
+  { id: 'clicks', label: 'Clicks', align: 'center' },
+  { id: 'status', label: 'Status', align: 'center' },
   { id: 'updatedat', label: 'Updated At', align: 'left' },
 ];
 
 // ----------------------------------------------------------------------
 
-StoreList.getLayout = function getLayout(page) {
+OfferLists.getLayout = function getLayout(page) {
   return <Layout variant="admin">{page}</Layout>;
 };
 // ----------------------------------------------------------------------
 
-export default function StoreList() {
+export default function OfferLists() {
   const {
     dense,
     page,
@@ -121,7 +119,7 @@ export default function StoreList() {
 
   const { push } = useRouter();
 
-  const [tableData, setTableData] = useState(_StoreList);
+  const [tableData, setTableData] = useState(_OfferLists);
 
   const [filterName, setFilterName] = useState('');
 
@@ -171,14 +169,13 @@ export default function StoreList() {
     (!dataFiltered.length && !!filterStatus);
 
   return (
-    <Page title="STORES">
+    <Page title="OFFERS">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="STORES"
+          heading="OFFERS"
           links={[
-            { name: 'Admin', href: PATH_ADMIN.root },
-            { name: 'Stores & Offers', href: PATH_ADMIN.store_offers.stores },
-            { name: 'Stores' },
+            { name: 'Dashboard', href: PATH_ADMIN.root },
+            { name: 'Offers', href: PATH_ADMIN.store_offers.stores },
           ]}
           action={
             <ThemeProvider theme={mytheme}>
@@ -211,7 +208,7 @@ export default function StoreList() {
 
           <Divider />
 
-          <StoreTableToolbar
+          <StoreCatetoriesTableToolbar
             filterName={filterName}
             filterRole={filterRole}
             onFilterName={handleFilterName}
@@ -260,7 +257,7 @@ export default function StoreList() {
 
                 <TableBody>
                   {dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <StoreTableRow
+                    <StoreCatetoriesTableRow
                       key={row.id}
                       row={row}
                       selected={selected.includes(row.id)}

@@ -103,7 +103,7 @@ export const PATH_ADMIN = {
     stores: path(ROOTS_ADMIN, '/storesoffers/stores'),
     storecashback: path(ROOTS_ADMIN, '/storesoffers/storecashback'),
     storecategories: path(ROOTS_ADMIN, '/storesoffers/storecategories'),
-    couponoffers: path(ROOTS_ADMIN, '/storesoffers/couponoffers'),
+    couponoffers: path(ROOTS_ADMIN, '/storesoffers/offers'),
     offercategories: path(ROOTS_ADMIN, '/storesoffers/offercategories'),
     dailydeals: path(ROOTS_ADMIN, '/storesoffers/dailydeals'),
     dealscategories: path(ROOTS_ADMIN, '/storesoffers/dealscategories'),

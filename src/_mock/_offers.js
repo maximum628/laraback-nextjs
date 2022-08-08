@@ -1,6 +1,6 @@
 import _mock from './_mock';
 import { randomNumberRange, randomInArray } from './funcs';
-export const _StoreList = [...Array(24)].map((_, index) => ({
+export const _OfferLists = [...Array(24)].map((_, index) => ({
   id: _mock.id(index),
   // avatarUrl: _mock.image.avatar(index),
   no: Number(index)+1,
@@ -16,7 +16,7 @@ export const _StoreList = [...Array(24)].map((_, index) => ({
   updatedat: '2022-08-01',
   role: _mock.role(index),
 }));
-export const _StoreCategories = [...Array(24)].map((_, index) => ({
+export const _OfferCategories = [...Array(24)].map((_, index) => ({
   id: _mock.id(index),
   // avatarUrl: _mock.image.avatar(index),
   no: Number(index)+1,

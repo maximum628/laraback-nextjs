@@ -39,8 +39,8 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'stores', path: PATH_ADMIN.store_offers.stores, icon: ICONS.ecommerce },
-          { title: 'storecashback', path: PATH_ADMIN.store_offers.storecashback, icon: ICONS.analytics },
-          { title: 'storecategories', path: PATH_ADMIN.store_offers.storecategories, icon: ICONS.banking },
+          { title: 'Store Cashback', path: PATH_ADMIN.store_offers.storecashback, icon: ICONS.analytics },
+          { title: 'Store Categories', path: PATH_ADMIN.store_offers.storecategories, icon: ICONS.banking },
           { title: 'couponoffers', path: PATH_ADMIN.store_offers.couponoffers, icon: ICONS.booking },
           { title: 'offercategories', path: PATH_ADMIN.store_offers.offercategories, icon: ICONS.booking },
           { title: 'dailydeals', path: PATH_ADMIN.store_offers.dailydeals, icon: ICONS.booking },

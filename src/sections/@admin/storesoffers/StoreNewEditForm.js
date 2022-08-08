@@ -3,24 +3,38 @@ import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 // next
-import { Storeouter } from 'next/router';
+import { useRouter } from 'next/router';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
+import { styled } from '@mui/material/styles';
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
+import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel,FormControl,FormLabel,RadioGroup,Radio } from '@mui/material';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import { countries } from '../../../_mock';
+import { cashbacktypes } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
-import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
+import {
+  FormProvider,
+  RHFSelect,
+  RHFSwitch,
+  RHFTextField,
+  RHFUploadAvatar,
+  RHFEditor
+} from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
+
+const LabelStyle = styled(Typography)(({ theme }) => ({
+  ...theme.typography.subtitle2,
+  color: theme.palette.text.secondary,
+  marginBottom: theme.spacing(1),
+}));
 
 StoreNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
@@ -28,7 +42,7 @@ StoreNewEditForm.propTypes = {
 };
 
 export default function StoreNewEditForm({ isEdit = false, currentStore }) {
-  const { push } = Storeouter();
+  const { push } = useRouter();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -141,20 +155,144 @@ export default function StoreNewEditForm({ isEdit = false, currentStore }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
+
+        <Grid item xs={12} md={6}>
+          <Card sx={{ p: 3 }}>
+            <Box
+              sx={{
+                display: 'grid',
+                columnGap: 2,
+                rowGap: 3,
+                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' },
+              }}
+            >
+              <RHFTextField name="name" label="Name*" />
+              <RHFTextField name="slug" label="Slug*" />
+              <RHFTextField name="homepage" label="Homepage*" />
+              <RHFTextField name="domainname" label="Domain Name" />
+              <RHFTextField name="cats" label="Cats" />
+              <RHFTextField name="deeplink" label="Deeplink*" />
+              <RHFSwitch
+                name="cashbackenabled"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Cashback Enabled *
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+              />
+              <RHFTextField name="cashbackpercent" label="Cashback Percent*" />
+              <RHFSelect name="cashbacktype" label="Cashback Type*" placeholder="Cashback Type">
+                <option value="" />
+                {cashbacktypes.map((option) => (
+                  <option key={option.value} value={option.label}>
+                    {option.label}
+                  </option>
+                ))}
+              </RHFSelect>
+              <RHFTextField name="trackingspeed" label="Tracking Speed" />
+              <RHFTextField name="confirmduration" label="Confirm Duration" />
+              <RHFSwitch
+                name="isclaimable"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Is Claimable *
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+              />
+              <RHFSwitch
+                name="isshareable"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Is Shareable *
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+              />
+              <RHFSwitch
+                name="isfeature"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Is Feature *
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+              />
+              <RHFSwitch
+                name="excludesitemap"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Exclude Sitemap *
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+              />
+              <RHFTextField name="network" label="Network" />
+              <RHFTextField name="networkcampaignid" label="Network Campaign Id" />
+              <RHFSwitch
+                name="ghost"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Ghost *
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+              />
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Status*</FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="draft"
+                  name="status"
+                >
+                  <FormControlLabel value="publish" control={<Radio />} label="Publish" />
+                  <FormControlLabel value="draft" control={<Radio />} label="Draft" />
+                  <FormControlLabel value="trash" control={<Radio />} label="Trash" />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+
+            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                {!isEdit ? 'Create Store' : 'Save Changes'}
+              </LoadingButton>
+            </Stack>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={6}>
           <Card sx={{ py: 10, px: 3 }}>
             {isEdit && (
               <Label
                 color={values.status !== 'active' ? 'error' : 'success'}
                 sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
               >
-                {values.status}
+                {"Logo"}
               </Label>
             )}
-
-            <Box sx={{ mb: 5 }}>
+            <Box sx={{ mb: 0 }}>
               <RHFUploadAvatar
                 name="avatarUrl"
+                variant="square"
                 maxSize={3145728}
                 onDrop={handleDrop}
                 helperText={
@@ -173,92 +311,28 @@ export default function StoreNewEditForm({ isEdit = false, currentStore }) {
                   </Typography>
                 }
               />
+              <RHFTextField name="h1" label="H1" />
+              <RHFTextField name="h2" label="H2" />
+              <RHFTextField name="metatitle" label="Meta Title" />
+              <RHFTextField name="metadesc" label="Meta Desc" />
+              <RHFTextField name="metakw" label="Meta Kw" />
+              <div>
+                <LabelStyle>Terms Todo</LabelStyle>
+                <RHFEditor simple name="termstodo" />
+              </div>
+              <div>
+                <LabelStyle>Terms Not Todo</LabelStyle>
+                <RHFEditor simple name="termsnottodo" />
+              </div>
+              <div>
+                <LabelStyle>About</LabelStyle>
+                <RHFEditor simple name="about" />
+              </div>
+              <div>
+                <LabelStyle>Tips</LabelStyle>
+                <RHFEditor simple name="tips" />
+              </div>
             </Box>
-
-            {isEdit && (
-              <FormControlLabel
-                labelPlacement="start"
-                control={
-                  <Controller
-                    name="status"
-                    control={control}
-                    render={({ field }) => (
-                      <Switch
-                        {...field}
-                        checked={field.value !== 'active'}
-                        onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                      />
-                    )}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-              />
-            )}
-
-            <RHFSwitch
-              name="isVerified"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the Store a verification email
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
-            <Box
-              sx={{
-                display: 'grid',
-                columnGap: 2,
-                rowGap: 3,
-                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
-              }}
-            >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
-
-              <RHFSelect name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((option) => (
-                  <option key={option.code} value={option.label}>
-                    {option.label}
-                  </option>
-                ))}
-              </RHFSelect>
-
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
-            </Box>
-
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create Store' : 'Save Changes'}
-              </LoadingButton>
-            </Stack>
           </Card>
         </Grid>
       </Grid>
